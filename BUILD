@@ -47,6 +47,11 @@ config_setting(
 )
 
 config_setting(
+    name = "freebsd_x86_64",
+    values = {"cpu": "solaris"},
+)
+
+config_setting(
     name = "windows_x86_64",
     values = {"cpu": "x64_windows"},
 )
@@ -89,6 +94,7 @@ posix_copts = [
 boringssl_copts = select({
     ":linux_x86_64": posix_copts,
     ":mac_x86_64": posix_copts,
+    ":freebsd_x86_64": posix_copts,
     ":solaris_x86_64": posix_copts,
     ":windows_x86_64": [
         "-DWIN32_LEAN_AND_MEAN",
@@ -115,6 +121,7 @@ boringssl_copts_c11 = boringssl_copts + select({
     ":linux_x86_64": posix_copts_c11,
     ":mac_x86_64": posix_copts_c11,
     ":solaris_x86_64": posix_copts_c11,
+    ":freebsd_x86_64": posix_copts_c11,
     "//conditions:default": [],
 })
 
@@ -128,6 +135,7 @@ boringssl_copts_cxx = boringssl_copts + select({
     ":linux_x86_64": posix_copts_cxx,
     ":mac_x86_64": posix_copts_cxx,
     ":solaris_x86_64": posix_copts_cxx,
+    ":freebsd_x86_64": posix_copts_cxx,
     "//conditions:default": [],
 })
 
